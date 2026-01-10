@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import FeaturedProject from "../components/FeaturedProduct";
 
 export default function Home() {
   const sectionRef = useRef(null);
@@ -189,6 +191,7 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+      <FeaturedProject />
 
       {/* =============== ABOUT & SKILLS SECTION =============== */}
       <section className="min-h-screen py-20 px-6 bg-black relative overflow-hidden">
