@@ -9,7 +9,7 @@ A modern, responsive portfolio website showcasing my journey as a full-stack dev
 
 ## 🌟 Live Demo
 
-[View Portfolio](https://bineet-portfolio.vercel.app/) *(Deployed on Vercel)*
+[View Portfolio](https://portfolio-opal-beta-41.vercel.app//) *(Deployed on Vercel)*
 
 ## 📋 Features
 
