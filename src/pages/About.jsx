@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function About() {
   const values = [
@@ -111,7 +111,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-800"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-gray-800"
             >
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-1">15+</div>
@@ -172,18 +172,22 @@ export default function About() {
               viewport={{ once: true }}
               className="mt-10"
             >
-              <motion.a
-                href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-blue-500 
-                text-black font-semibold hover:bg-blue-400 transition-all shadow-lg shadow-blue-500/30"
+              <motion.div
                 whileHover={{ scale: 1.05, x: 2 }}
                 whileTap={{ scale: 0.95 }}
+                className="inline-block"
               >
-                <span>View My Work</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </motion.a>
+                <Link
+                  to="/projects"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-blue-500 
+                  text-black font-semibold hover:bg-blue-400 transition-all shadow-lg shadow-blue-500/30"
+                >
+                  <span>View My Work</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -202,7 +206,7 @@ export default function About() {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-transparent" />
+            <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-transparent" />
 
             <div className="space-y-16">
               {timeline.map((item, index) => (
@@ -212,14 +216,12 @@ export default function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  className={`flex items-center gap-8 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-                    }`}
+                  className={`relative flex items-center gap-8 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}
                 >
                   {/* Content card */}
-                  <div className="flex-1">
-                    <div className={`${index % 2 === 0 ? "text-right" : "text-left"
-                      }`}>
-                      <div className="inline-block bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-colors">
+                  <div className="flex-1 ml-12 md:ml-0">
+                    <div className={`${index % 2 === 0 ? "md:text-right" : "md:text-left"} text-left`}>
+                      <div className="inline-block bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-colors w-full md:w-auto">
                         <div className="text-blue-400 font-bold text-sm mb-2">{item.year}</div>
                         <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
                         <p className="text-gray-400 text-sm">{item.description}</p>
@@ -228,7 +230,7 @@ export default function About() {
                   </div>
 
                   {/* Center dot */}
-                  <div className="relative flex items-center justify-center">
+                  <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-8 flex items-center justify-center">
                     <motion.div
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
@@ -239,7 +241,7 @@ export default function About() {
                   </div>
 
                   {/* Empty space for alternating layout */}
-                  <div className="flex-1" />
+                  <div className="hidden md:block flex-1" />
                 </motion.div>
               ))}
             </div>
@@ -262,24 +264,24 @@ export default function About() {
             to collaborate with other developers.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <motion.a
-              href="/contact"
-              className="px-8 py-4 rounded-lg bg-blue-500 text-black font-semibold 
-              hover:bg-blue-400 transition-all shadow-lg shadow-blue-500/30"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Get in Touch
-            </motion.a>
-            <motion.a
-              href="/projects"
-              className="px-8 py-4 rounded-lg border-2 border-gray-700 text-white 
-              hover:border-blue-400 hover:text-blue-400 transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Projects
-            </motion.a>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                to="/contact"
+                className="inline-block px-8 py-4 rounded-lg bg-blue-500 text-black font-semibold 
+                hover:bg-blue-400 transition-all shadow-lg shadow-blue-500/30"
+              >
+                Get in Touch
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                to="/projects"
+                className="inline-block px-8 py-4 rounded-lg border-2 border-blue-500 text-white font-semibold 
+                hover:bg-blue-500 hover:text-black transition-all"
+              >
+                View Projects
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>

@@ -1,0 +1,81 @@
+import React from 'react';
+
+// You can pass props to change size or color dynamically
+export default function Logo({ className = "w-10 h-10" }) {
+    return (
+        <svg
+            viewBox="0 0 100 100"
+            className={className}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Bineet's Logic Node Logo"
+        >
+            {/* 1. Main Outer Container - The System Boundary */}
+            <rect
+                x="5" y="5"
+                width="90" height="90"
+                rx="15" // Rounded corners match your UI style
+                className="stroke-gray-700" // Subtle gray border
+                strokeWidth="2"
+            />
+
+            {/* 2. The Initial 'B' - Stylized as a logic flow */}
+            <path
+                d="M35 25V75M35 25H55C65 25 70 30 70 37.5C70 45 65 50 55 50M35 50H55C65 50 70 55 70 62.5C70 70 65 75 55 75H35"
+                className="stroke-blue-400" // Your main accent color
+                strokeWidth="6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+
+            {/* 3. Logic Nodes - Representing Inputs/Outputs and Connectivity */}
+
+            {/* Top Input Node (Logic In) */}
+            <circle
+                cx="50" y="5"
+                r="5"
+                className="fill-gray-900 stroke-blue-400"
+                strokeWidth="2"
+            />
+
+            {/* Side Input (Alternative/Interrupt) */}
+            <circle
+                cx="5" y="50"
+                r="5"
+                className="fill-gray-900 stroke-cyan-400" // Subtle gradient variation
+                strokeWidth="2"
+            />
+
+            {/* Main Output Node (The Result/Speech) */}
+            <circle
+                cx="95" y="50"
+                r="5"
+                className="fill-gray-900 stroke-blue-400"
+                strokeWidth="2"
+            />
+            {/* Pulse effect on the output node */}
+            <circle
+                cx="95" y="50"
+                r="8"
+                className="stroke-blue-500/50"
+                strokeWidth="1"
+            >
+                <animate
+                    attributeName="r"
+                    from="5" to="12"
+                    dur="2s"
+                    begin="0s"
+                    repeatCount="indefinite"
+                />
+                <animate
+                    attributeName="stroke-opacity"
+                    from="1" to="0"
+                    dur="2s"
+                    begin="0s"
+                    repeatCount="indefinite"
+                />
+            </circle>
+        </svg>
+    );
+}

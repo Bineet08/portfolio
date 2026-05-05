@@ -1,3 +1,8 @@
+import wordseek from "./images/wordseek.png";
+import dukaan from "./images/dukaan.png"
+import Attendence from "./images/Attendence.png"
+import movieee from "./images/movieee.png"
+
 const projects = [
     {
         id: 1,
@@ -22,7 +27,7 @@ const projects = [
         github: "https://github.com/Bineet08/dukaan",
         live: "https://dukaan-liard.vercel.app/",
         image:
-            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+            dukaan,
         category: "Full Stack",
         duration: "2 months",
         status: "Completed",
@@ -72,6 +77,28 @@ const projects = [
 
     {
         id: 4,
+        title: "WordSeek Helper",
+        description:
+            "A full-stack word constraint solver for Telegram and Wordle-style puzzles, built with React and Node.js.",
+        problem:
+            "Solving word puzzles with multiple letter constraints manually is slow and inefficient.",
+        solution:
+            "Developed a REST-based filtering engine with a responsive, keyboard-first frontend for fast constraint-based word matching.",
+        challenge:
+            "Implementing accurate pattern + include/exclude filtering while maintaining fast response time and clean frontend-backend separation.",
+        tech: ["React", "Tailwind CSS", "Node.js", "Express", "Vercel", "Render"],
+        github: "https://github.com/Bineet08/WordSeekHelper",
+        live: "https://word-seek-helper-tg.vercel.app/",
+        image: wordseek,
+        category: "Full Stack",
+        duration: "2 Weeks",
+        status: "Completed",
+    },
+
+
+
+    {
+        id: 5,
         title: "Student Attendance Manager",
         description:
             "A local-first attendance tracker designed for flexible academic schedules.",
@@ -85,14 +112,14 @@ const projects = [
         github: "https://github.com/Bineet08",
         live: "https://attendence-manager-taupe.vercel.app/",
         image:
-            "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80",
+            Attendence,
         category: "Tool",
         duration: "1 month",
         status: "Completed",
     },
 
     {
-        id: 5,
+        id: 6,
         title: "Personal Portfolio Website",
         description:
             "A multi-page animated portfolio showcasing projects, skills, and engineering approach.",
@@ -112,7 +139,7 @@ const projects = [
         status: "Live",
     },
     {
-        id: 6,
+        id: 7,
         title: "Movieee",
         description:
             "A streaming web app where wanderers of cinema roam — browse, search, and enjoy tales told frame by frame.",
@@ -126,7 +153,7 @@ const projects = [
         github: "https://github.com/Bineet08/movieee",
         live: "https://movieee-two.vercel.app",
         image:
-            "https://raw.githubusercontent.com/Bineet08/movieee/main/public/preview.png",
+            movieee,
         category: "Web App / Streaming UI",
         duration: "2–3 weeks",
         status: "Active / Prototype",

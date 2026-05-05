@@ -1,5 +1,10 @@
 import { motion } from "framer-motion";
 
+const RATINGS = {
+    codeforces: "1500+",
+    leetcode: "2100+",
+};
+
 export default function Skills() {
     const coreSkills = [
         {
@@ -132,7 +137,7 @@ export default function Skills() {
                             </p>
                             <span className="inline-block px-4 py-2 rounded-full bg-blue-500/10 
               text-blue-400 text-sm border border-blue-500/30">
-                                Rating: 1400+
+                                Rating: {RATINGS.codeforces}
                             </span>
                         </div>
 
@@ -147,7 +152,7 @@ export default function Skills() {
                             </p>
                             <span className="inline-block px-4 py-2 rounded-full bg-green-500/10 
               text-green-400 text-sm border border-green-500/30">
-                                Rating: 1850+
+                                Rating: {RATINGS.leetcode}
                             </span>
                         </div>
                     </div>
@@ -165,13 +170,13 @@ export default function Skills() {
                     </h2>
 
                     <div className="grid md:grid-cols-2 gap-12">
-                        {Object.entries(otherSkills).map(([category, skills]) => (
+                        {Object.entries(otherSkills).map(([category, skillList]) => (
                             <div key={category}>
                                 <h3 className="text-lg font-medium text-gray-300 mb-4">
                                     {category}
                                 </h3>
                                 <div className="flex flex-wrap gap-3">
-                                    {skills.map((skill) => (
+                                    {skillList.map((skill) => (
                                         <span
                                             key={skill}
                                             className="px-4 py-2 rounded-full bg-gray-800 

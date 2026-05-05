@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import projects from "../data/projects";
 
@@ -40,7 +39,7 @@ export default function FeaturedProject() {
                     variants={container}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-120px" }}
+                    viewport={{ once: true, margin: "-10%" }}
                     className="grid md:grid-cols-2 gap-12 items-center"
                 >
                     {/* LEFT — Story */}
@@ -71,16 +70,16 @@ export default function FeaturedProject() {
                             className="space-y-4 text-gray-300 mb-10"
                         >
                             <li>
-                                <span className="text-blue-400 font-medium">Problem:</span>{" "}
-                                {featured.problem}
+                                <strong className="text-blue-400 font-medium">Problem:</strong>{" "}
+                                {featured.problem || "Not specified"}
                             </li>
                             <li>
-                                <span className="text-green-400 font-medium">Solution:</span>{" "}
-                                {featured.solution}
+                                <strong className="text-green-400 font-medium">Solution:</strong>{" "}
+                                {featured.solution || "Not specified"}
                             </li>
                             <li>
-                                <span className="text-purple-400 font-medium">Challenge:</span>{" "}
-                                {featured.challenge}
+                                <strong className="text-purple-400 font-medium">Challenge:</strong>{" "}
+                                {featured.challenge || "Not specified"}
                             </li>
                         </motion.ul>
 
@@ -88,7 +87,7 @@ export default function FeaturedProject() {
                             variants={item}
                             className="flex flex-wrap gap-3 mb-10"
                         >
-                            {featured.tech.map((tech) => (
+                            {featured.tech?.map((tech) => (
                                 <span
                                     key={tech}
                                     className="px-4 py-2 text-sm bg-gray-800 border border-gray-700 
@@ -102,8 +101,10 @@ export default function FeaturedProject() {
                         <motion.div variants={item} className="flex gap-4">
                             <motion.a
                                 href={featured.live}
-                                className="px-6 py-3 rounded-lg bg-blue-500 text-black 
-                font-semibold hover:bg-blue-400 transition"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-3 rounded-lg border border-blue-500 text-white 
+                font-semibold hover:bg-blue-500 hover:text-black transition"
                                 whileHover={{ x: 4 }}
                                 transition={{ type: "spring", stiffness: 200 }}
                             >
@@ -113,9 +114,9 @@ export default function FeaturedProject() {
                             <motion.a
                                 href={featured.github}
                                 target="_blank"
-                                rel="noreferrer"
-                                className="px-6 py-3 rounded-lg border border-gray-700 
-                hover:border-blue-400 hover:text-blue-400 transition"
+                                rel="noopener noreferrer"
+                                className="px-6 py-3 rounded-lg border border-blue-500 text-white 
+                font-semibold hover:bg-blue-500 hover:text-black transition"
                                 whileHover={{ x: -4 }}
                                 transition={{ type: "spring", stiffness: 200 }}
                             >
@@ -136,6 +137,7 @@ export default function FeaturedProject() {
                                 src={featured.image}
                                 alt={featured.title}
                                 className="w-full h-80 object-cover opacity-90"
+                                loading="lazy"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         </div>

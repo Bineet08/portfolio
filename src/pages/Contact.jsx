@@ -42,7 +42,7 @@ export default function Contact() {
   ];
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText("your-email@example.com");
+    navigator.clipboard.writeText("ankitgupta170620@gmail.com");
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 
 export default function ProjectCard({ project, index }) {
@@ -17,6 +16,8 @@ export default function ProjectCard({ project, index }) {
                     src={project.image}
                     alt={project.title}
                     className="w-full h-80 object-cover rounded-2xl border border-gray-800"
+                    loading="lazy"
+                    decoding="async"
                 />
             </div>
 
@@ -50,11 +51,11 @@ export default function ProjectCard({ project, index }) {
                 </div>
 
                 <div className="flex gap-6">
-                    <a href={project.github} target="_blank" className="text-blue-400  border border-blue-400 rounded-sm transition-transform duration-300 ease-in-out transform scale-100 hover:scale-110 px-2">Code</a>
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-blue-400  border border-blue-400 rounded-sm transition-transform duration-300 ease-in-out transform scale-100 hover:scale-110 px-2">Code</a>
                     {(project.live === "#") ?
-                        <a className="text-red-400 border border-red-400 rounded-sm px-2 pointer-none:">Live Not Avaibale</a>
+                        <span className="text-red-400 border border-red-400 rounded-sm px-2 cursor-not-allowed opacity-80">Live Not Available</span>
                         :
-                        <a href={project.live} target="_blank" className="text-blue-400  border border-blue-400 rounded-sm transition-transform duration-300 ease-in-out transform scale-100 hover:scale-110 px-2">Live</a>}
+                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-blue-400  border border-blue-400 rounded-sm transition-transform duration-300 ease-in-out transform scale-100 hover:scale-110 px-2">Live</a>}
                 </div>
             </div>
         </motion.div>

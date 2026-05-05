@@ -1,17 +1,23 @@
-/* eslint-disable no-unused-vars */
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useMemo } from "react";
 import projects from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const categories = ["All", ...new Set(projects.map(p => p.category))];
 
-  const filtered =
-    selectedCategory === "All"
-      ? projects
-      : projects.filter(p => p.category === selectedCategory);
+  const categories = useMemo(
+    () => ["All", ...new Set(projects.map((p) => p.category))],
+    []
+  );
+
+  const filtered = useMemo(
+    () =>
+      selectedCategory === "All"
+        ? projects
+        : projects.filter((p) => p.category === selectedCategory),
+    [selectedCategory]
+  );
 
   return (
     <section className="min-h-screen px-6 py-24 bg-black">
@@ -24,7 +30,7 @@ export default function Projects() {
           Projects
         </motion.h1>
 
-        <div className="flex gap-3 mb-16">
+        <div className="flex flex-wrap gap-3 mb-16">
           {categories.map(c => (
             <button
               key={c}
@@ -39,11 +45,22 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className="space-y-24">
-          {filtered.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} />
-          ))}
-        </div>
+        <motion.div layout className="space-y-24">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((p, i) => (
+              <motion.div
+                key={p.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ProjectCard project={p} index={i} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

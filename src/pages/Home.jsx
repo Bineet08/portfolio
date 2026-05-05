@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import FeaturedProject from "../components/FeaturedProduct";
+import { motion, useScroll, useTransform } from "framer-motion";
+import FeaturedProject from "../components/FeaturedProject";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const sectionRef = useRef(null);
 
   /* ------------------ ENTRY ANIMATION ------------------ */
   const containerVariants = {
@@ -28,8 +27,9 @@ export default function Home() {
   };
 
   /* ------------------ SCROLL ANIMATION ------------------ */
+  const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: heroRef,
     offset: ["start start", "end start"],
   });
 
@@ -40,19 +40,19 @@ export default function Home() {
 
   /* ------------------ SKILLS DATA ------------------ */
   const skills = [
-    { name: "React", level: 85, color: "from-cyan-500 to-blue-500" },
-    { name: "Node.js", level: 75, color: "from-green-500 to-emerald-500" },
-    { name: "JavaScript", level: 70, color: "from-blue-500 to-indigo-500" },
-    { name: "C++", level: 80, color: "from-yellow-500 to-orange-500" },
-    { name: "MongoDB", level: 65, color: "from-green-600 to-teal-500" },
-    { name: "Tailwind CSS", level: 90, color: "from-sky-400 to-cyan-400" },
+    { name: "React", color: "from-cyan-500 to-blue-500" },
+    { name: "Node.js", color: "from-green-500 to-emerald-500" },
+    { name: "JavaScript", color: "from-blue-500 to-indigo-500" },
+    { name: "C++", color: "from-yellow-500 to-orange-500" },
+    { name: "MongoDB", color: "from-green-600 to-teal-500" },
+    { name: "Tailwind CSS", color: "from-sky-400 to-cyan-400" },
   ];
 
   return (
     <>
       {/* =============== HERO SECTION =============== */}
       <section
-        ref={sectionRef}
+        ref={heroRef}
         className="min-h-screen pt-20 px-6 flex items-center
         bg-gradient-to-br from-gray-900 via-black to-gray-900
         relative overflow-hidden"
@@ -85,34 +85,50 @@ export default function Home() {
               Student Developer · Full-Stack Learner
             </motion.p>
 
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-gray-300 italic mb-12 max-w-xl
-              border-l-4 border-blue-500/50 pl-4"
-            >
-              I design logic, then teach it how to speak.
-            </motion.p>
+            <motion.div variants={itemVariants} className="mb-12">
+              <p className="text-lg text-gray-300 italic max-w-xl border-l-4 border-blue-500/50 pl-4">
+                {"I design logic, then teach it how to speak.".split(" ").map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 5, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{ duration: 0.4, delay: 0.6 + index * 0.08 }}
+                    className="inline-block mr-[0.25em]"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </p>
+            </motion.div>
 
             <motion.div variants={itemVariants} className="flex gap-6">
-              <motion.a
-                href="/projects"
-                className="px-7 py-3 rounded-lg bg-blue-500 text-black font-semibold
-                hover:bg-blue-400 transition relative overflow-hidden"
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="inline-block"
               >
-                View Projects
-              </motion.a>
+                <Link
+                  to="/projects"
+                  className="px-7 py-3 rounded-lg border-2 border-blue-500 text-white font-semibold
+                  hover:bg-blue-500 hover:text-black transition relative overflow-hidden inline-block"
+                >
+                  View Projects
+                </Link>
+              </motion.div>
 
-              <motion.a
-                href="/contact"
-                className="px-7 py-3 rounded-lg border-2 border-gray-600
-                hover:border-blue-400 hover:text-blue-400 transition"
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="inline-block"
               >
-                Contact Me
-              </motion.a>
+                <Link
+                  to="/contact"
+                  className="px-7 py-3 rounded-lg border-2 border-blue-500 text-white font-semibold
+                  hover:bg-blue-500 hover:text-black transition relative overflow-hidden inline-block"
+                >
+                  Contact Me
+                </Link>
+              </motion.div>
             </motion.div>
 
             {/* Scroll indicator - fades out completely */}
@@ -238,28 +254,19 @@ export default function Home() {
             <h2 className="text-5xl font-bold text-white mb-12">
               Technical <span className="text-blue-400">Skills</span>
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="flex flex-wrap gap-4">
               {skills.map((skill, index) => (
                 <motion.div
                   key={skill.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  className="space-y-2"
+                  className="relative group p-[1px] rounded-full overflow-hidden cursor-default shadow-lg shadow-blue-500/5 hover:shadow-blue-500/20 transition-all duration-300"
                 >
-                  <div className="flex justify-between items-center">
-                    <span className="text-white font-medium">{skill.name}</span>
-                    <span className="text-gray-400 text-sm">{skill.level}%</span>
-                  </div>
-                  <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                    <motion.div
-                      className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      transition={{ duration: 1, delay: index * 0.1 + 0.3, ease: "easeOut" }}
-                      viewport={{ once: true, margin: "-50px" }}
-                    />
+                  <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-70 group-hover:opacity-100 transition-opacity duration-300`} />
+                  <div className="relative px-6 py-3 bg-gray-900 rounded-full text-white font-medium group-hover:bg-opacity-40 transition-all duration-300">
+                    {skill.name}
                   </div>
                 </motion.div>
               ))}
@@ -275,15 +282,19 @@ export default function Home() {
             className="mt-20 text-center"
           >
             <p className="text-gray-400 mb-6">Want to see what I've built?</p>
-            <motion.a
-              href="/projects"
-              className="inline-block px-8 py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 
-              text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              className="inline-block"
             >
-              Explore My Projects →
-            </motion.a>
+              <Link
+                to="/projects"
+                className="inline-block px-8 py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 
+                text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+              >
+                Explore My Projects →
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
