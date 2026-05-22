@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 // You can pass props to change size or color dynamically
 export default function Logo({ className = "w-10 h-10" }) {
@@ -33,7 +33,7 @@ export default function Logo({ className = "w-10 h-10" }) {
 
             {/* Top Input Node (Logic In) */}
             <circle
-                cx="50" y="5"
+                cx="50" cy="5"
                 r="5"
                 className="fill-gray-900 stroke-blue-400"
                 strokeWidth="2"
@@ -41,7 +41,7 @@ export default function Logo({ className = "w-10 h-10" }) {
 
             {/* Side Input (Alternative/Interrupt) */}
             <circle
-                cx="5" y="50"
+                cx="5" cy="50"
                 r="5"
                 className="fill-gray-900 stroke-cyan-400" // Subtle gradient variation
                 strokeWidth="2"
@@ -49,7 +49,7 @@ export default function Logo({ className = "w-10 h-10" }) {
 
             {/* Main Output Node (The Result/Speech) */}
             <circle
-                cx="95" y="50"
+                cx="95" cy="50"
                 r="5"
                 className="fill-gray-900 stroke-blue-400"
                 strokeWidth="2"

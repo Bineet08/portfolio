@@ -1,116 +1,99 @@
-import { useState, useEffect } from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const location = useLocation();
+
 
     const links = [
-        { path: "/", label: "Home" },
-        { path: "/about", label: "About" },
+        { path: "/", label: "Index" },
+        { path: "/about", label: "Profile" },
         { path: "/projects", label: "Projects" },
-        { path: "/skills", label: "Skills" },
+        { path: "/skills", label: "Capabilities" },
         { path: "/contact", label: "Contact" },
     ];
 
-    // Close mobile menu whenever the route changes
-    useEffect(() => {
-        setIsOpen(false);
-    }, [location]);
-
-    // Framer Motion Variants for Staggered Mobile Menu
-    const menuVariants = {
-        closed: {
-            opacity: 0,
-            height: 0,
-            transition: { staggerChildren: 0.05, staggerDirection: -1 }
-        },
-        open: {
-            opacity: 1,
-            height: "auto",
-            transition: { staggerChildren: 0.1, delayChildren: 0.2 }
-        }
-    };
-
-    const itemVariants = {
-        closed: { opacity: 0, x: -16 },
-        open: { opacity: 1, x: 0 }
-    };
 
     return (
-        <nav className="fixed top-0 w-full bg-black/80 backdrop-blur-md border-b border-gray-800 z-50">
-            <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <nav className="fixed top-0 w-full bg-[#050505] border-b border-neutral-900 z-50">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-5 flex justify-between items-center">
 
-                {/* Branding: Logo + Name aligned on same baseline */}
-                <Link
-                    to="/"
-                    className="flex items-center gap-3 group"
-                    aria-label="Back to home"
-                >
-                    <Logo className="w-9 h-9 transition-transform duration-300 group-hover:rotate-12" />
-                    <span className="text-xl font-bold text-white tracking-tighter">
-                        Bineet
+                <Link to="/" className="flex items-center gap-3 group" aria-label="Home">
+                    <Logo className="w-5 h-5 grayscale group-hover:grayscale-0 group-hover:rotate-6 transition-all duration-500 ease-out" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-neutral-400 group-hover:text-neutral-100 transition-colors mt-0.5">
+                        BINEET GUPTA
                     </span>
                 </Link>
 
-                {/* Desktop Menu: Refined Typography */}
-                <div className="hidden md:flex gap-8 items-center">
+                {/* Desktop Nav with interactive dimming */}
+                <div className="hidden md:flex gap-8 items-center group/nav">
                     {links.map((link) => (
                         <NavLink
                             key={link.path}
                             to={link.path}
                             className={({ isActive }) =>
-                                `text-sm font-medium tracking-wide transition-all duration-300 ${isActive
-                                    ? "text-blue-400"
-                                    : "text-gray-400 hover:text-white"
+                                `relative text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 pb-1.5 ${isActive
+                                    ? "text-neutral-50"
+                                    : "text-neutral-500 group-hover/nav:text-neutral-600 hover:!text-neutral-200"
                                 }`
                             }
                         >
-                            {link.label}
+                            {({ isActive }) => (
+                                <>
+                                    {link.label}
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="nav_underline"
+                                            className="absolute left-0 right-0 bottom-0 h-[2px] bg-neutral-100"
+                                            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                                        />
+                                    )}
+                                </>
+                            )}
                         </NavLink>
                     ))}
                 </div>
 
-                {/* Mobile Toggle: Accessible & Interactive */}
+                {/* Mobile toggle */}
                 <button
-                    className="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none transition-colors"
+                    className="md:hidden p-2 text-neutral-500 hover:text-neutral-200 transition-colors"
                     onClick={() => setIsOpen(!isOpen)}
                     aria-label="Toggle navigation menu"
                     aria-expanded={isOpen}
                 >
-                    <div className="w-6 h-6 relative flex items-center justify-center">
-                        <span className={`absolute block w-full h-0.5 bg-current transition-transform duration-300 ${isOpen ? 'rotate-45' : '-translate-y-2'}`} />
-                        <span className={`absolute block w-full h-0.5 bg-current transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`} />
-                        <span className={`absolute block w-full h-0.5 bg-current transition-transform duration-300 ${isOpen ? '-rotate-45' : 'translate-y-2'}`} />
+                    <div className="w-5 h-5 relative flex items-center justify-center">
+                        <span className={`absolute block w-full h-[1px] bg-current transition-transform duration-300 ease-[0.16,1,0.3,1] ${isOpen ? 'rotate-45' : '-translate-y-1.5'}`} />
+                        <span className={`absolute block w-full h-[1px] bg-current transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+                        <span className={`absolute block w-full h-[1px] bg-current transition-transform duration-300 ease-[0.16,1,0.3,1] ${isOpen ? '-rotate-45' : 'translate-y-1.5'}`} />
                     </div>
                 </button>
             </div>
 
-            {/* Mobile Menu Dropdown */}
+            {/* Mobile menu */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        variants={menuVariants}
-                        initial="closed"
-                        animate="open"
-                        exit="closed"
-                        className="md:hidden bg-gray-900/95 border-b border-gray-800 overflow-hidden"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="md:hidden border-t border-neutral-900 bg-[#050505] overflow-hidden"
                     >
-                        <div className="flex flex-col px-6 py-8 space-y-6">
+                        <div className="flex flex-col px-6 py-4">
                             {links.map((link) => (
-                                <motion.div key={link.path} variants={itemVariants}>
-                                    <NavLink
-                                        to={link.path}
-                                        className={({ isActive }) =>
-                                            `text-2xl font-semibold tracking-tight transition-colors ${isActive ? "text-blue-400" : "text-gray-300"
-                                            }`
-                                        }
-                                    >
-                                        {link.label}
-                                    </NavLink>
-                                </motion.div>
+                                <NavLink
+                                    key={link.path}
+                                    to={link.path}
+                                    onClick={() => setIsOpen(false)}
+                                    className={({ isActive }) =>
+                                        `py-3 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors ${isActive ? "text-neutral-50" : "text-neutral-500"
+                                        }`
+                                    }
+                                >
+                                    {link.label}
+                                </NavLink>
                             ))}
                         </div>
                     </motion.div>

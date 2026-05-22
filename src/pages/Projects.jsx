@@ -20,47 +20,60 @@ export default function Projects() {
   );
 
   return (
-    <section className="min-h-screen px-6 py-24 bg-black">
+    <section className="min-h-screen px-6 md:px-12 lg:px-24 pt-40 pb-20 bg-[#050505]">
       <div className="max-w-7xl mx-auto">
-        <motion.h1
+
+        {/* Header */}
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-6xl font-bold text-white mb-12"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-20 max-w-2xl"
         >
-          Projects
-        </motion.h1>
+          <span className="eyebrow block mb-6">Archive</span>
+          <h1 className="text-5xl md:text-7xl font-bold text-neutral-50 mb-6 tracking-tighter">
+            Projects
+          </h1>
+          <p className="text-neutral-400 text-lg leading-relaxed">
+            Full-stack builds focusing on resilient architecture
+            and high-fidelity interfaces.
+          </p>
+        </motion.div>
 
-        <div className="flex flex-wrap gap-3 mb-16">
-          {categories.map(c => (
+        {/* Filters */}
+        <div className="flex flex-wrap gap-3 mb-4 pb-8 border-b border-neutral-900">
+          {categories.map((c) => (
             <button
               key={c}
               onClick={() => setSelectedCategory(c)}
-              className={`px-5 py-2 rounded-full ${selectedCategory === c
-                ? "bg-blue-500 text-black"
-                : "bg-gray-800 text-gray-300"
-                }`}
+              className={`px-4 py-2 text-xs font-bold tracking-widest uppercase rounded-sm transition-all duration-300 ${
+                selectedCategory === c
+                  ? "bg-neutral-100 text-black"
+                  : "text-neutral-500 hover:text-neutral-300 border border-neutral-800 hover:border-neutral-600"
+              }`}
             >
               {c}
             </button>
           ))}
         </div>
 
-        <motion.div layout className="space-y-24">
+        {/* Project List */}
+        <div>
           <AnimatePresence mode="popLayout">
-            {filtered.map((p, i) => (
+            {filtered.map((p) => (
               <motion.div
                 key={p.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <ProjectCard project={p} index={i} />
+                <ProjectCard project={p} />
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

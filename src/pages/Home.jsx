@@ -1,303 +1,388 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import FeaturedProject from "../components/FeaturedProject";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import FeaturedProject from "../components/FeaturedProject";
+import profilePic from "../assets/displaypic/profile.jpg";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
+};
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09 } },
+};
+
+const stats = [
+  { value: "4+", label: "Projects Shipped" },
+  { value: "2+", label: "Years Coding" },
+  { value: "1500+", label: "Codeforces" },
+  { value: "2100+", label: "LeetCode" },
+];
+
+const services = [
+  { num: "01", title: "Full-Stack Engineering", desc: "End-to-end apps — schema design, REST APIs, auth, and deployment." },
+  { num: "02", title: "UI & Interaction", desc: "Interfaces built with tight typography, intentional spacing, and smooth motion." },
+  { num: "03", title: "Systems & Architecture", desc: "Resilient data flows, WebSocket integration, and maintainable code structure." },
+];
 
 export default function Home() {
-
-  /* ------------------ ENTRY ANIMATION ------------------ */
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
-  /* ------------------ SCROLL ANIMATION ------------------ */
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const textY = useTransform(scrollYProgress, [0, 0.3], [0, -80]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.6]);
-  const visualY = useTransform(scrollYProgress, [0, 0.5], [0, 120]);
-  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-
-  /* ------------------ SKILLS DATA ------------------ */
-  const skills = [
-    { name: "React", color: "from-cyan-500 to-blue-500" },
-    { name: "Node.js", color: "from-green-500 to-emerald-500" },
-    { name: "JavaScript", color: "from-blue-500 to-indigo-500" },
-    { name: "C++", color: "from-yellow-500 to-orange-500" },
-    { name: "MongoDB", color: "from-green-600 to-teal-500" },
-    { name: "Tailwind CSS", color: "from-sky-400 to-cyan-400" },
-  ];
+  const tools = ["React", "Node.js", "Express", "MongoDB", "Framer Motion", "Tailwind CSS"];
 
   return (
-    <>
-      {/* =============== HERO SECTION =============== */}
-      <section
-        ref={heroRef}
-        className="min-h-screen pt-20 px-6 flex items-center
-        bg-gradient-to-br from-gray-900 via-black to-gray-900
-        relative overflow-hidden"
-      >
-        {/* Ambient background glow */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-        </div>
+    <div className="bg-[#050505] relative min-h-screen overflow-x-hidden bg-grid-pattern">
+      {/* Ambient lighting spot */}
+      <div className="absolute inset-0 bg-vignette pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-          {/* ---------------- LEFT : TEXT ---------------- */}
-          <motion.div
-            style={{ y: textY, opacity: textOpacity }}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h1
-              variants={itemVariants}
-              className="text-6xl md:text-7xl font-bold mb-6 text-white"
+      {/* ─────────────────── HERO ─────────────────── */}
+      <section className="relative z-10 px-6 md:px-12 lg:px-24 pt-32 pb-12 min-h-screen flex flex-col justify-between">
+        <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-between relative">
+
+          {/* Top Bar with coordinates */}
+          <div className="flex items-center justify-between border-b border-neutral-900/60 pb-6 mb-8 md:mb-12">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="flex items-center gap-6"
             >
-              Hi, I'm <span className="text-blue-400">Bineet</span>
-            </motion.h1>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-xl md:text-2xl text-gray-400 mb-8"
+              <span className="text-[10px] font-mono tracking-widest text-neutral-600">SYS_REF // INDEX_2026</span>
+              <span className="hidden sm:inline w-[1px] h-3 bg-neutral-800" />
+              <span className="hidden sm:inline text-[10px] font-mono tracking-widest text-neutral-600">LOC: 25.3176° N, 82.9739° E</span>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="flex items-center gap-2"
             >
-              Student Developer · Full-Stack Learner
-            </motion.p>
-
-            <motion.div variants={itemVariants} className="mb-12">
-              <p className="text-lg text-gray-300 italic max-w-xl border-l-4 border-blue-500/50 pl-4">
-                {"I design logic, then teach it how to speak.".split(" ").map((word, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 5, filter: "blur(4px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ duration: 0.4, delay: 0.6 + index * 0.08 }}
-                    className="inline-block mr-[0.25em]"
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </p>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-neutral-400">Open to Work</span>
             </motion.div>
+          </div>
 
-            <motion.div variants={itemVariants} className="flex gap-6">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block"
-              >
-                <Link
-                  to="/projects"
-                  className="px-7 py-3 rounded-lg border-2 border-blue-500 text-white font-semibold
-                  hover:bg-blue-500 hover:text-black transition relative overflow-hidden inline-block"
-                >
-                  View Projects
-                </Link>
-              </motion.div>
+          {/* 12-Column Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-start my-auto relative py-4">
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block"
-              >
-                <Link
-                  to="/contact"
-                  className="px-7 py-3 rounded-lg border-2 border-blue-500 text-white font-semibold
-                  hover:bg-blue-500 hover:text-black transition relative overflow-hidden inline-block"
-                >
-                  Contact Me
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Scroll indicator - fades out completely */}
+            {/* LEFT 8 COLUMNS: Large Typography, Bio, CTA */}
             <motion.div
-              className="mt-16 flex items-center gap-2 text-gray-500 text-sm"
-              style={{ opacity: scrollIndicatorOpacity }}
+              initial="hidden" animate="visible" variants={stagger}
+              className="md:col-span-8 flex flex-col gap-10"
             >
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              {/* Big Title with Mobile Portrait */}
+              <div className="flex items-center justify-between gap-4">
+                <motion.h1
+                  variants={fadeUp}
+                  className="text-[clamp(2.75rem,10vw,7.5rem)] font-black text-neutral-50 tracking-[-0.05em] leading-[0.82] flex-1"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                  />
-                </svg>
-              </motion.div>
-              <span>Scroll to explore</span>
-            </motion.div>
-          </motion.div>
+                  BINEET<br />GUPTA
+                </motion.h1>
 
-          {/* ---------------- RIGHT : VISUAL ---------------- */}
-          <motion.div
-            className="hidden md:flex justify-center items-center relative"
-            style={{ y: visualY }}
-          >
-            {/* Floating blob */}
-            <motion.div
-              className="absolute w-80 h-80 rounded-full
-              bg-gradient-to-tr from-blue-500/40 to-purple-500/40 blur-3xl"
-              animate={{ y: [0, -25, 0], scale: [1, 1.1, 1] }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-
-            {/* Rotating ring */}
-            <motion.div
-              className="w-64 h-64 rounded-full border-2 border-blue-400/20"
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            />
-
-            {/* Center glow */}
-            <motion.div
-              className="absolute w-32 h-32 rounded-full
-              bg-gradient-to-r from-blue-400 to-purple-400 opacity-50"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 0.7, 0.5],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </motion.div>
-        </div>
-      </section>
-      <FeaturedProject />
-
-      {/* =============== ABOUT & SKILLS SECTION =============== */}
-      <section className="min-h-screen py-20 px-6 bg-black relative overflow-hidden">
-        {/* Background accent */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          {/* About Me */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mb-20"
-          >
-            <h2 className="text-5xl font-bold text-white mb-6">
-              About <span className="text-blue-400">Me</span>
-            </h2>
-            <div className="max-w-3xl">
-              <p className="text-lg text-gray-300 leading-relaxed mb-4">
-                I'm a passionate student developer on a journey to master full-stack development.
-                My fascination with technology began with curiosity about how things work behind
-                the screen, and it has evolved into a dedicated pursuit of building meaningful
-                digital experiences.
-              </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                From crafting intuitive user interfaces to architecting robust backend systems,
-                I love every aspect of bringing ideas to life through code. When I'm not coding,
-                you'll find me exploring new frameworks, contributing to open source, or documenting
-                my learning journey.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Skills */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <h2 className="text-5xl font-bold text-white mb-12">
-              Technical <span className="text-blue-400">Skills</span>
-            </h2>
-            <div className="flex flex-wrap gap-4">
-              {skills.map((skill, index) => (
+                {/* Mobile square profile pic */}
                 <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  className="relative group p-[1px] rounded-full overflow-hidden cursor-default shadow-lg shadow-blue-500/5 hover:shadow-blue-500/20 transition-all duration-300"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="md:hidden shrink-0 w-28 h-28 sm:w-36 sm:h-36 border border-neutral-900 bg-[#070707]/30 p-1 sm:p-1.5 rounded-[4px] relative self-center"
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-70 group-hover:opacity-100 transition-opacity duration-300`} />
-                  <div className="relative px-6 py-3 bg-gray-900 rounded-full text-white font-medium group-hover:bg-opacity-40 transition-all duration-300">
-                    {skill.name}
+                  <div className="absolute inset-0 bg-neutral-900/40 rounded-[2px] transform translate-x-1 translate-y-1" />
+                  <div className="relative z-10 w-full h-full overflow-hidden rounded-[2px] aspect-square bg-neutral-950">
+                    <img
+                      src={profilePic}
+                      alt="Bineet Gupta portrait"
+                      className="w-full h-full object-cover object-top"
+                    />
                   </div>
                 </motion.div>
-              ))}
-            </div>
-          </motion.div>
+              </div>
 
-          {/* CTA to Projects */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mt-20 text-center"
-          >
-            <p className="text-gray-400 mb-6">Want to see what I've built?</p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block"
-            >
-              <Link
-                to="/projects"
-                className="inline-block px-8 py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 
-                text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+              {/* Sub-row: bio and stats preview */}
+              <motion.div
+                variants={fadeUp}
+                className="grid sm:grid-cols-12 gap-8 items-start border-t border-neutral-900/60 pt-8"
               >
-                Explore My Projects →
-              </Link>
+                {/* Developer statement */}
+                <div className="sm:col-span-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-1 h-1 bg-neutral-500 rounded-full" />
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+                      Full-Stack Architect
+                    </span>
+                  </div>
+                  <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-md">
+                    Architecting production-ready web apps through structured engineering, clean schema patterns, and uncompromising layout quality.
+                  </p>
+                </div>
+
+                {/* Micro tech overview */}
+                <div className="sm:col-span-4 flex flex-col gap-2">
+                  <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-neutral-600">Focus Areas</span>
+                  <div className="space-y-1 font-mono text-[10px] text-neutral-400">
+                    <p>● Systems Engineering</p>
+                    <p>● Creative Frontend</p>
+                    <p>● Schema & DB Security</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Awwwards-style Magnetic custom buttons */}
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mt-4">
+                <Link
+                  to="/projects"
+                  className="group relative inline-flex items-center justify-center px-8 py-3.5 bg-neutral-100 text-black font-mono text-[11px] uppercase tracking-[0.2em] font-bold overflow-hidden transition-all duration-300 rounded-[2px]"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Projects <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">↗</span>
+                  </span>
+                  <span className="absolute inset-0 bg-neutral-200 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+                </Link>
+
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center px-8 py-3.5 border border-neutral-800 text-neutral-400 font-mono text-[11px] uppercase tracking-[0.2em] font-bold overflow-hidden transition-all duration-300 hover:border-neutral-500 hover:text-white hover:bg-neutral-900/40 rounded-[2px]"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Resume
+                    <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                      ↗
+                    </span>
+                  </span>
+
+                  <span className="absolute inset-0 bg-neutral-900/50 transform scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+                </a>
+
+                <Link
+                  to="/contact"
+                  className="group relative inline-flex items-center justify-center px-8 py-3.5 border border-neutral-800 text-neutral-400 font-mono text-[11px] uppercase tracking-[0.2em] font-bold overflow-hidden transition-all duration-300 hover:border-neutral-500 hover:text-white rounded-[2px]"
+                >
+                  <span className="relative z-10">Contact</span>
+                  <span className="absolute inset-0 bg-neutral-900/50 transform scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+                </Link>
+              </motion.div>
             </motion.div>
+
+            {/* RIGHT 4 COLUMNS: Structured Portrait card with Tension & Alignment */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden md:flex md:col-span-4 justify-end"
+            >
+              {/* Structural border box to anchor portrait */}
+              <div className="relative group/portrait p-4 border border-neutral-900 bg-[#070707]/30 backdrop-blur-[2px] rounded-[4px] w-full max-w-[200px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[320px]">
+
+                {/* Small blueprint indicators */}
+                <div className="absolute -top-1.5 -left-1.5 font-mono text-[8px] text-neutral-800">+</div>
+                <div className="absolute -bottom-1.5 -right-1.5 font-mono text-[8px] text-neutral-800">+</div>
+
+                {/* Location details shelf */}
+                <div className="flex justify-between w-full text-[8px] font-mono text-neutral-600 uppercase tracking-widest pb-3 mb-4 border-b border-neutral-900">
+                  <span>SYS_ID // 08</span>
+                  <span>IIT (BHU) VARANASI</span>
+                </div>
+
+                {/* Image container with custom shadows */}
+                <div className="relative overflow-hidden aspect-[3/4.2] rounded-[2px] bg-neutral-950 mb-4">
+                  {/* Subtle offset shadow backing */}
+                  <div className="absolute inset-0 bg-neutral-900/40 rounded-[2px] transform translate-x-1.5 translate-y-1.5 group-hover/portrait:-translate-x-1 group-hover/portrait:-translate-y-1 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+
+                  <img
+                    src={profilePic}
+                    alt="Bineet Gupta portrait"
+                    className="relative z-10 w-full h-full object-cover object-top transition-all duration-700 scale-100 group-hover/portrait:scale-105"
+                  />
+                </div>
+
+                {/* Identity labels below portrait */}
+                <div className="space-y-1 mt-4">
+                  <p className="text-[11px] font-black uppercase tracking-[0.25em] text-neutral-200">BINEET GUPTA</p>
+                  <p className="text-[9px] font-mono uppercase tracking-[0.15em] text-neutral-500">Full-Stack Engineer</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Scroll Cue / Footnote */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4, duration: 1 }}
+            className="flex items-center gap-3 pt-6 border-t border-neutral-900"
+          >
+            <motion.span
+              animate={{ y: [0, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="text-neutral-700 text-sm font-mono"
+            >
+              ↓
+            </motion.span>
+            <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-neutral-700">Scroll to explore</span>
+            <div className="ml-auto hidden md:flex items-center gap-5 text-[9px] font-mono uppercase tracking-[0.15em] text-neutral-700">
+              <span>IIT VARANASI</span>
+              <span>·</span>
+              <span>EST_2026</span>
+            </div>
           </motion.div>
         </div>
       </section>
-    </>
+
+      {/* ─────────────────── STATS BAR ─────────────────── */}
+      <section className="relative z-10 border-t border-b border-neutral-900 bg-[#080808]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-900"
+          >
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                variants={fadeUp}
+                className="py-8 px-4 md:px-8 flex flex-col gap-1"
+              >
+                <span className="text-3xl md:text-4xl font-black text-neutral-100 tracking-tight">{stat.value}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-600">{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─────────────────── DISCIPLINE ─────────────────── */}
+      <section className="relative z-10 py-20 px-6 md:px-12 lg:px-24 bg-[#050505]">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden" whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeUp} className="mb-10"
+          >
+            <span className="eyebrow">Discipline</span>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-neutral-900">
+            {services.map((s, i) => (
+              <motion.div
+                key={s.num}
+                initial="hidden" whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeUp}
+                className={`py-10 group pr-8
+                  ${i < services.length - 1 ? "border-b md:border-b-0 md:border-r border-neutral-900" : ""}
+                  ${i > 0 ? "md:pl-8" : ""}`}
+              >
+                <span className="text-xs font-mono text-neutral-700 block mb-5">{s.num}</span>
+                <h3 className="text-base font-bold text-neutral-200 mb-3 group-hover:text-white transition-colors">{s.title}</h3>
+                <p className="text-sm text-neutral-500 leading-relaxed">{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────── SELECTED WORK ─────────────────── */}
+      <section className="relative z-10 py-24 border-t border-neutral-900 bg-[#050505]">
+        <FeaturedProject />
+      </section>
+
+      {/* ─────────────────── PROFILE & STACK ─────────────────── */}
+      <section className="relative z-10 py-32 px-6 md:px-12 lg:px-24 bg-[#0a0a0a] border-t border-neutral-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
+
+            <motion.div
+              initial="hidden" whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeUp} className="lg:col-span-4"
+            >
+              <span className="eyebrow block mb-6">About</span>
+              <h2 className="text-4xl md:text-5xl font-black text-neutral-100 tracking-tight leading-tight">
+                Profile &<br />Capabilities
+              </h2>
+            </motion.div>
+
+            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-16">
+
+              <motion.div
+                initial="hidden" whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={fadeUp}
+              >
+                <span className="eyebrow block mb-6">Background</span>
+                <div className="text-neutral-400 space-y-4 leading-relaxed text-sm">
+                  <p>
+                    Started with competitive programming in C++, which gave me a
+                    structural approach to problems before touching a web framework.
+                  </p>
+                  <p>
+                    Today I build maintainable full-stack systems — from resilient schemas
+                    to polished interfaces — prioritizing correctness at every layer.
+                  </p>
+                </div>
+                <Link
+                  to="/about"
+                  className="group relative inline-flex items-center gap-2 mt-8 text-neutral-50 text-xs font-bold uppercase tracking-widest pb-1"
+                >
+                  <span>Full Story</span>
+                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-neutral-700 group-hover:bg-neutral-50 transition-colors duration-300" />
+                  <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial="hidden" whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={fadeUp}
+              >
+                <span className="eyebrow block mb-6">Core Tech</span>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {tools.map((tool) => (
+                    <span
+                      key={tool}
+                      className="px-2 py-1 text-[10px] font-semibold tracking-wider uppercase text-neutral-500 border border-neutral-850 rounded-sm hover:bg-neutral-100 hover:text-black hover:border-neutral-100 transition-all duration-300 cursor-default"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  to="/skills"
+                  className="group relative inline-flex items-center gap-2 text-neutral-50 text-xs font-bold uppercase tracking-widest pb-1"
+                >
+                  <span>All Skills</span>
+                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-neutral-700 group-hover:bg-neutral-50 transition-colors duration-300" />
+                  <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                </Link>
+              </motion.div>
+
+            </div>
+          </div>
+
+          {/* CTA strip */}
+          <motion.div
+            initial="hidden" whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeUp}
+            className="mt-24 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+          >
+            <p className="text-neutral-600 text-xs uppercase tracking-widest font-bold">
+              Open to internships & freelance
+            </p>
+            <Link
+              to="/contact"
+              className="group relative inline-flex items-center gap-3 text-neutral-50 font-black text-xl uppercase tracking-tight pb-1"
+            >
+              <span>Start a Conversation</span>
+              <span className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-neutral-50 transition-all duration-500 ease-[0.16,1,0.3,1]" />
+              <span>→</span>
+            </Link>
+          </motion.div>
+
+        </div>
+      </section>
+    </div>
   );
 }

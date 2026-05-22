@@ -1,288 +1,172 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-export default function About() {
-  const values = [
-    {
-      icon: "🎯",
-      title: "System thinking",
-      description: "Designing flows that scale beyond the first version."
-    },
-    {
-      icon: "🏗️",
-      title: "Clean architecture",
-      description: "Separating concerns and writing maintainable code."
-    },
-    {
-      icon: "🔧",
-      title: "Real-world problems",
-      description: "Working on projects with practical constraints."
-    },
-    {
-      icon: "📚",
-      title: "Continuous learning",
-      description: "Improving fundamentals alongside new tools."
-    }
-  ];
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+};
 
+export default function About() {
   const timeline = [
     {
       year: "2023",
-      title: "Started Full-Stack Journey",
-      description: "Began learning web development, built first CRUD application"
+      title: "Algorithms First",
+      detail: "Learned programming through competitive problems in C++. Understood memory, constraints, and optimization before touching a web framework.",
     },
     {
       year: "2024",
-      title: "Deep Dive into Backend",
-      description: "Explored system design, databases, and API architecture"
+      title: "First Applications",
+      detail: "Built isolated systems like attendance trackers. Learned the hard way that async data flows and state mismatches are harder than algorithms.",
     },
     {
       year: "2025",
-      title: "Building Real Solutions",
-      description: "Creating production-ready applications with proper testing"
-    }
+      title: "Production Systems",
+      detail: "Shipping full-stack applications. Focusing intensely on error boundaries, schema design, and seamless user feedback loops.",
+    },
   ];
 
   return (
-    <section className="min-h-screen px-6 py-28 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden">
-      {/* Enhanced ambient background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-3xl" />
-      </div>
+    <section className="min-h-screen px-6 md:px-12 lg:px-24 pt-40 pb-32 bg-[#050505] relative z-10">
+      <div className="max-w-7xl mx-auto">
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Page heading */}
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-20"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-32 max-w-3xl"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            About <span className="text-blue-400">Me</span>
+          <span className="eyebrow block mb-6">Manifesto</span>
+          <h1 className="text-5xl md:text-7xl font-bold text-neutral-50 mb-8 tracking-tighter">
+            Philosophy
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl">
-            A short story about how I think, build, and keep improving.
-          </p>
+          <div className="space-y-6 text-lg md:text-xl text-neutral-400 leading-relaxed font-medium">
+            <p>
+              Writing code is the easy part. Handling edge cases, failures, 
+              and unpredictable user behavior is where the actual work happens.
+            </p>
+            <p>
+              I don't build generic templates. I build systems that are technically 
+              resilient and visually uncompromising.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Main content grid */}
-        <div className="grid md:grid-cols-2 gap-16 items-start mb-24">
-          {/* LEFT — Narrative */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-            className="space-y-6 text-gray-300 leading-relaxed text-lg"
-          >
-            <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-blue-400 first-letter:mr-2 first-letter:float-left">
-              I'm a student developer who enjoys building systems that feel
-              simple on the surface but are thoughtfully designed underneath.
-              I'm most interested in how ideas turn into working software —
-              from the first line of logic to the final user experience.
-            </p>
-
-            <p>
-              Over time, I've worked on full-stack projects involving real-time
-              communication, file uploads, authentication, and data modeling.
-              These projects taught me that good software isn't just about
-              features — it's about handling edge cases, tradeoffs, and failure
-              scenarios gracefully.
-            </p>
-
-            <p>
-              I care deeply about code structure, readability, and long-term
-              maintainability. I prefer clean abstractions over clever hacks,
-              and I enjoy refactoring as much as building something new.
-            </p>
-
-            <p>
-              Outside of development, I like learning how systems behave at
-              scale, solving algorithmic problems, and understanding why things
-              break — not just how to fix them.
-            </p>
-
-            {/* Quick stats */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
+          
+          {/* Narrative & Focus */}
+          <div className="lg:col-span-7 space-y-32">
+            
+            {/* Story */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-gray-800"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="space-y-6 text-base text-neutral-400 leading-relaxed"
             >
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-1">15+</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider">Projects</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-1">3+</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider">Years</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-1">∞</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider">Learning</div>
-              </div>
+              <h2 className="text-2xl font-bold text-neutral-100 mb-8 tracking-tight">The Origin</h2>
+              <p>
+                My foundation in C++ and competitive programming gave me a structural advantage. 
+                I learned to decompose problems logically before I ever worried about padding or flexbox.
+              </p>
+              <p>
+                However, I realized that algorithms alone don't solve human problems. I transitioned to 
+                full-stack development because I wanted to build tangible tools—starting with systems to 
+                solve friction in my own life, like an online presence for my family's store.
+              </p>
+              <p>
+                Today, I care deeply about architecture. I document <em className="text-neutral-200 not-italic">why</em> decisions 
+                are made, not just <em className="text-neutral-200 not-italic">how</em> things work.
+              </p>
             </motion.div>
-          </motion.div>
 
-          {/* RIGHT — Highlights */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="bg-gray-900/60 border border-gray-800 rounded-2xl p-8 hover:border-gray-700 transition-colors"
-          >
-            <h2 className="text-2xl font-semibold text-white mb-8">
-              What I focus on
-            </h2>
-
-            <div className="space-y-6">
-              {values.map((value, index) => (
-                <motion.div
-                  key={value.title}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex gap-4 group"
-                >
-                  <div className="text-3xl group-hover:scale-110 transition-transform">
-                    {value.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-blue-400 font-medium mb-1">
-                      {value.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
+            {/* Principles */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              viewport={{ once: true }}
-              className="mt-10"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
             >
-              <motion.div
-                whileHover={{ scale: 1.05, x: 2 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block"
-              >
-                <Link
-                  to="/projects"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-blue-500 
-                  text-black font-semibold hover:bg-blue-400 transition-all shadow-lg shadow-blue-500/30"
-                >
-                  <span>View My Work</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Journey Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="mb-24"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
-            My <span className="text-blue-400">Journey</span>
-          </h2>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-transparent" />
-
-            <div className="space-y-16">
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={item.year}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  className={`relative flex items-center gap-8 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}
-                >
-                  {/* Content card */}
-                  <div className="flex-1 ml-12 md:ml-0">
-                    <div className={`${index % 2 === 0 ? "md:text-right" : "md:text-left"} text-left`}>
-                      <div className="inline-block bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-blue-500/50 transition-colors w-full md:w-auto">
-                        <div className="text-blue-400 font-bold text-sm mb-2">{item.year}</div>
-                        <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
-                        <p className="text-gray-400 text-sm">{item.description}</p>
-                      </div>
+              <h2 className="text-2xl font-bold text-neutral-100 mb-12 tracking-tight">Engineering Focus</h2>
+              <div className="space-y-12">
+                {[
+                  {
+                    title: "Failure State Design",
+                    detail: "Every asynchronous operation needs explicit error handling. A polished UI is useless if an unhandled rejection crashes the production build.",
+                  },
+                  {
+                    title: "Schema Immutability",
+                    detail: "Data modeling decisions compound exponentially. A flawed schema is harder to correct than a flawed interface because it dictates everything downstream.",
+                  },
+                  {
+                    title: "Strict API Contracts",
+                    detail: "Frontend and backend must agree on response shapes implicitly. Designing robust data fetching hooks prevents days of debugging mismatched expectations.",
+                  },
+                ].map((item, i) => (
+                  <div key={item.title} className="flex gap-6 items-start">
+                    <span className="text-neutral-600 font-mono text-sm mt-1">0{i + 1}</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-neutral-200 mb-2">{item.title}</h3>
+                      <p className="text-sm text-neutral-500 leading-relaxed">{item.detail}</p>
                     </div>
                   </div>
+                ))}
+              </div>
+            </motion.div>
 
-                  {/* Center dot */}
-                  <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-8 flex items-center justify-center">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
-                      viewport={{ once: true }}
-                      className="w-4 h-4 rounded-full bg-blue-500 border-4 border-black z-10"
-                    />
+          </div>
+
+          {/* Timeline (Right Column) */}
+          <div className="lg:col-span-4 lg:col-start-9">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h2 className="text-2xl font-bold text-neutral-100 mb-12 tracking-tight">Timeline</h2>
+              
+              <div className="space-y-0">
+                {timeline.map((item, i) => (
+                  <div key={item.year} className="relative flex gap-8 pb-16 last:pb-0 group">
+                    {/* Line */}
+                    {i !== timeline.length - 1 && (
+                      <div className="absolute top-8 left-[3.5px] bottom-0 w-[1px] bg-neutral-900 group-hover:bg-neutral-700 transition-colors" />
+                    )}
+                    {/* Dot */}
+                    <div className="absolute top-2 left-0 w-[8px] h-[8px] rounded-full bg-neutral-700 group-hover:bg-neutral-300 transition-colors" />
+                    
+                    <div className="pl-6">
+                      <div className="text-xs font-mono text-neutral-500 mb-2 tracking-widest">{item.year}</div>
+                      <h3 className="text-lg font-bold text-neutral-200 mb-3">{item.title}</h3>
+                      <p className="text-sm text-neutral-500 leading-relaxed">{item.detail}</p>
+                    </div>
                   </div>
-
-                  {/* Empty space for alternating layout */}
-                  <div className="hidden md:block flex-1" />
-                </motion.div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
 
-        {/* Bottom CTA */}
+        </div>
+
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-gray-800 rounded-2xl p-12"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mt-32 pt-16 border-t border-neutral-900 flex flex-col sm:flex-row gap-6 items-center"
         >
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Let's Build Something Together
-          </h2>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            I'm always interested in hearing about new projects and opportunities
-            to collaborate with other developers.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                to="/contact"
-                className="inline-block px-8 py-4 rounded-lg bg-blue-500 text-black font-semibold 
-                hover:bg-blue-400 transition-all shadow-lg shadow-blue-500/30"
-              >
-                Get in Touch
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                to="/projects"
-                className="inline-block px-8 py-4 rounded-lg border-2 border-blue-500 text-white font-semibold 
-                hover:bg-blue-500 hover:text-black transition-all"
-              >
-                View Projects
-              </Link>
-            </motion.div>
-          </div>
+          <span className="text-neutral-500 text-sm font-medium uppercase tracking-widest">Next Steps</span>
+          <Link
+            to="/contact"
+            className="group relative inline-flex items-center gap-2 text-neutral-50 font-bold text-xl pb-1"
+          >
+            <span className="relative z-10">Initiate Contact</span>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-neutral-50 transition-all group-hover:w-full z-0" />
+            <span className="relative z-10 transition-transform group-hover:translate-x-1">→</span>
+          </Link>
         </motion.div>
       </div>
     </section>

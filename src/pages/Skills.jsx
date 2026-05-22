@@ -1,197 +1,151 @@
 import { motion } from "framer-motion";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+};
+
 const RATINGS = {
-    codeforces: "1500+",
-    leetcode: "2100+",
+  codeforces: "1500+",
+  leetcode: "2100+",
 };
 
 export default function Skills() {
-    const coreSkills = [
-        {
-            name: "React",
-            description: "Component architecture, hooks, state management, routing",
-        },
-        {
-            name: "JavaScript (ES6+)",
-            description: "Asynchronous patterns, closures, clean logic",
-        },
-        {
-            name: "Node.js",
-            description: "Backend services, APIs, authentication flows",
-        },
-        {
-            name: "Express.js",
-            description: "REST APIs, middleware, validation, error handling",
-        },
-        {
-            name: "MongoDB",
-            description: "Schema design, queries, indexing, data modeling",
-        },
-        {
-            name: "Tailwind CSS",
-            description: "Responsive UI, design systems, utility-first styling",
-        },
-    ];
+  const coreStack = [
+    { name: "React", detail: "Component architecture, hooks, context, routing" },
+    { name: "JavaScript (ES6+)", detail: "Async patterns, closures, prototypes, module systems" },
+    { name: "Node.js", detail: "HTTP servers, middleware pipelines, process management" },
+    { name: "Express.js", detail: "REST APIs, auth middleware, error handling, file uploads" },
+    { name: "MongoDB", detail: "Schema design, aggregation, indexing, Mongoose ODM" },
+    { name: "Tailwind CSS", detail: "Utility-first styling, responsive design, design systems" },
+  ];
 
-    const otherSkills = {
-        Frontend: [
-            "HTML5",
-            "CSS3",
-            "Framer Motion",
-            "Responsive Design",
-            "Accessibility (Basics)",
-        ],
-        Backend: [
-            "JWT Authentication",
-            "REST API Design",
-            "File Uploads",
-            "WebSockets",
-        ],
-        Tools: [
-            "Git & GitHub",
-            "VS Code",
-            "npm",
-            "Postman",
-            "Vercel",
-        ],
-        Fundamentals: [
-            "Data Structures",
-            "Algorithms",
-            "Problem Solving",
-            "Basic System Design",
-        ],
-    };
+  const other = {
+    "Frontend": ["HTML5", "CSS3", "Framer Motion", "Responsive Design", "Accessibility"],
+    "Backend": ["JWT Auth", "REST APIs", "File Uploads", "WebSockets"],
+    "Tools": ["Git", "GitHub", "VS Code", "npm", "Postman", "Vercel", "Render"],
+    "Fundamentals": ["Data Structures", "Algorithms", "Problem Solving", "System Design"],
+  };
 
-    return (
-        <section className="min-h-screen px-6 pt-28 pb-20 bg-gradient-to-b from-black via-gray-900 to-black relative">
-            {/* Ambient background */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-            </div>
+  return (
+    <section className="min-h-screen px-6 md:px-12 lg:px-24 pt-40 pb-32 bg-[#050505] relative z-10">
+      <div className="max-w-7xl mx-auto">
 
-            <div className="max-w-6xl mx-auto relative z-10">
-                {/* Page Heading */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-20"
-                >
-                    <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                        Skills & <span className="text-blue-400">Tools</span>
-                    </h1>
-                    <p className="text-gray-400 text-lg max-w-2xl">
-                        Technologies I use regularly, and fundamentals I continue to refine.
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-32 max-w-2xl"
+        >
+          <span className="eyebrow block mb-6">Capabilities</span>
+          <h1 className="text-5xl md:text-7xl font-bold text-neutral-50 mb-6 tracking-tighter">
+            Technical Arsenal
+          </h1>
+          <p className="text-neutral-400 text-lg leading-relaxed">
+            The languages, frameworks, and methodologies I employ 
+            to architect robust software systems.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
+          
+          {/* Left Column: Core Stack & CP */}
+          <div className="lg:col-span-7 space-y-24">
+            
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h2 className="text-2xl font-bold text-neutral-100 mb-8 tracking-tight border-b border-neutral-900 pb-4">
+                Core Stack
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-10">
+                {coreStack.map((skill) => (
+                  <div key={skill.name} className="group">
+                    <h3 className="text-base font-semibold text-neutral-200 mb-2 group-hover:text-white transition-colors">
+                      {skill.name}
+                    </h3>
+                    <p className="text-sm text-neutral-500 leading-relaxed">
+                      {skill.detail}
                     </p>
-                </motion.div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
 
-                {/* Core Skills */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    viewport={{ once: true }}
-                    className="mb-24"
-                >
-                    <h2 className="text-3xl font-semibold text-white mb-10">
-                        Core Skills
-                    </h2>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h2 className="text-2xl font-bold text-neutral-100 mb-8 tracking-tight border-b border-neutral-900 pb-4">
+                Algorithm & Logic
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-8">
+                <div className="stark-panel p-6 border-l-2 border-l-neutral-600 group hover:border-l-white transition-colors">
+                  <div className="flex items-baseline justify-between mb-4">
+                    <h3 className="text-base font-bold text-neutral-200">Codeforces</h3>
+                    <span className="text-sm font-mono text-neutral-500">{RATINGS.codeforces}</span>
+                  </div>
+                  <p className="text-sm text-neutral-500 leading-relaxed">
+                    Regular contest participation. Focus on implementation accuracy and complexity analysis.
+                  </p>
+                </div>
+                <div className="stark-panel p-6 border-l-2 border-l-neutral-600 group hover:border-l-white transition-colors">
+                  <div className="flex items-baseline justify-between mb-4">
+                    <h3 className="text-base font-bold text-neutral-200">LeetCode</h3>
+                    <span className="text-sm font-mono text-neutral-500">{RATINGS.leetcode}</span>
+                  </div>
+                  <p className="text-sm text-neutral-500 leading-relaxed">
+                    Consistent problem solving across data structures. Preferring clean over clever code.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {coreSkills.map((skill) => (
-                            <div
-                                key={skill.name}
-                                className="bg-gray-900/60 border border-gray-800 rounded-xl p-6"
-                            >
-                                <h3 className="text-xl font-medium text-white mb-2">
-                                    {skill.name}
-                                </h3>
-                                <p className="text-gray-400">{skill.description}</p>
-                            </div>
-                        ))}
+          </div>
+
+          {/* Right Column: Other Skills */}
+          <div className="lg:col-span-4 lg:col-start-9">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="sticky top-32 space-y-16"
+            >
+              <h2 className="text-2xl font-bold text-neutral-100 mb-8 tracking-tight border-b border-neutral-900 pb-4">
+                Peripheral Knowledge
+              </h2>
+              
+              <div className="space-y-10">
+                {Object.entries(other).map(([category, skills]) => (
+                  <div key={category}>
+                    <h3 className="text-xs font-semibold text-neutral-600 uppercase tracking-widest mb-4">
+                      {category}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-2 py-1 text-[10px] font-semibold tracking-wider uppercase text-neutral-500 border border-neutral-850 rounded-sm hover:bg-neutral-100 hover:text-black hover:border-neutral-100 transition-all duration-300 cursor-default"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
-                </motion.div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
 
-                {/* Competitive Programming */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    viewport={{ once: true }}
-                    className="mb-24"
-                >
-                    <h2 className="text-3xl font-semibold text-white mb-10">
-                        Problem Solving & Competitive Programming
-                    </h2>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {/* Codeforces */}
-                        <div className="bg-gray-900/60 border border-gray-800 rounded-xl p-6">
-                            <h3 className="text-xl font-medium text-white mb-3">
-                                Codeforces
-                            </h3>
-                            <p className="text-gray-400 mb-4">
-                                Regular participation in algorithmic contests with focus on
-                                implementation accuracy, edge cases, and time complexity.
-                            </p>
-                            <span className="inline-block px-4 py-2 rounded-full bg-blue-500/10 
-              text-blue-400 text-sm border border-blue-500/30">
-                                Rating: {RATINGS.codeforces}
-                            </span>
-                        </div>
-
-                        {/* LeetCode */}
-                        <div className="bg-gray-900/60 border border-gray-800 rounded-xl p-6">
-                            <h3 className="text-xl font-medium text-white mb-3">
-                                LeetCode
-                            </h3>
-                            <p className="text-gray-400 mb-4">
-                                Consistent problem solving across data structures and algorithms,
-                                emphasizing clean and optimal solutions.
-                            </p>
-                            <span className="inline-block px-4 py-2 rounded-full bg-green-500/10 
-              text-green-400 text-sm border border-green-500/30">
-                                Rating: {RATINGS.leetcode}
-                            </span>
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Other Skills */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    viewport={{ once: true }}
-                >
-                    <h2 className="text-3xl font-semibold text-white mb-10">
-                        Other Technical Skills
-                    </h2>
-
-                    <div className="grid md:grid-cols-2 gap-12">
-                        {Object.entries(otherSkills).map(([category, skillList]) => (
-                            <div key={category}>
-                                <h3 className="text-lg font-medium text-gray-300 mb-4">
-                                    {category}
-                                </h3>
-                                <div className="flex flex-wrap gap-3">
-                                    {skillList.map((skill) => (
-                                        <span
-                                            key={skill}
-                                            className="px-4 py-2 rounded-full bg-gray-800 
-                      border border-gray-700 text-sm text-gray-300 
-                      hover:border-blue-400 hover:text-blue-400 transition"
-                                        >
-                                            {skill}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
-            </div>
-        </section>
-    );
+        </div>
+      </div>
+    </section>
+  );
 }

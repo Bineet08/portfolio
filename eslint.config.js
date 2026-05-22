@@ -23,7 +23,7 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': 'off', // Disabled because standard no-unused-vars doesn't understand JSX properly without eslint-plugin-react
     },
   },
 ])
