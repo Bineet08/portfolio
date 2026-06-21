@@ -15,7 +15,7 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Navbar />
-      <div className="">
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -24,7 +24,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
+      </main>
       <Footer />
     </BrowserRouter>
   );

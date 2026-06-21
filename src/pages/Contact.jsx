@@ -113,7 +113,9 @@ export default function Contact() {
                 </div>
                 <div className="flex items-center justify-between text-neutral-300 group-hover:text-neutral-50 transition-colors">
                   <span className="text-lg font-medium">{link.value}</span>
-                  <span className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                  <span className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
+                    {link.external ? "↗" : "✉"}
+                  </span>
                 </div>
               </motion.a>
             ))}

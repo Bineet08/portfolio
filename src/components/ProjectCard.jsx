@@ -60,15 +60,17 @@ export default function ProjectCard({ project }) {
           </div>
 
           <div className="flex gap-6 text-sm font-medium">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/link relative inline-flex items-center gap-1 text-neutral-400 hover:text-neutral-50 transition-colors pb-0.5"
-            >
-              <span>Source</span>
-              <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-neutral-50 transition-all group-hover/link:w-full" />
-            </a>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/link relative inline-flex items-center gap-1 text-neutral-400 hover:text-neutral-50 transition-colors pb-0.5"
+              >
+                <span>Source</span>
+                <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-neutral-50 transition-all group-hover/link:w-full" />
+              </a>
+            )}
             {project.live === "#" ? (
               <span className="text-neutral-700 select-none">Local only</span>
             ) : (

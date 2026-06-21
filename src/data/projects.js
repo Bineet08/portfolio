@@ -1,6 +1,6 @@
 import wordseek from "./images/wordseek.png";
 import dukaan from "./images/dukaan.png";
-import Attendence from "./images/Attendence.png";
+import Attendance from "./images/Attendence.png";
 import movieee from "./images/movieee.png";
 
 const projects = [
@@ -25,7 +25,7 @@ const projects = [
         description: "A persistent messaging application built to understand WebSocket internals and client-server synchronization.",
         keyFeatures: ["Socket.IO broadcasting", "Message persistence", "Timestamp-based ordering"],
         tech: ["React", "Node.js", "Socket.IO", "MongoDB"],
-        github: "https://github.com/Bineet08",
+        github: null,
         live: "https://real-time-chat-app-teal-nine.vercel.app/",
         image: "https://images.unsplash.com/photo-1525182008055-f88b95ff7980?w=800&q=80",
         category: "Web App",
@@ -51,7 +51,7 @@ const projects = [
         description: "A robust upload system for unstable connections. Breaks files into 1MB chunks and reassembles them securely on the server.",
         keyFeatures: ["Upload resumption", "SHA-256 validation", "Out-of-order assembly"],
         tech: ["React", "Node.js", "Express", "MongoDB"],
-        github: "https://github.com/Bineet08",
+        github: null,
         live: "#",
         image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
         category: "System",
@@ -64,9 +64,9 @@ const projects = [
         description: "A local-first app that calculates college attendance percentages based on changing timetables and subject-specific holidays.",
         keyFeatures: ["Local Storage state", "Schedule-based logic", "Edge-case date math"],
         tech: ["React", "JavaScript", "Local Storage"],
-        github: "https://github.com/Bineet08",
+        github: null,
         live: "https://attendence-manager-taupe.vercel.app/",
-        image: Attendence,
+        image: Attendance,
         category: "Tool",
         year: "2024",
     },

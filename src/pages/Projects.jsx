@@ -16,7 +16,7 @@ export default function Projects() {
       selectedCategory === "All"
         ? projects
         : projects.filter((p) => p.category === selectedCategory),
-    [selectedCategory]
+    [selectedCategory, projects]
   );
 
   return (

@@ -61,7 +61,7 @@ export default function FeaturedProject() {
               <p className="text-neutral-400 text-sm leading-relaxed mb-6">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-2 mt-auto relative z-20">
+              <div className="flex flex-wrap gap-2 mt-auto relative z-20 pointer-events-none">
                 {project.tech.slice(0, 3).map((t) => (
                   <span
                     key={t}

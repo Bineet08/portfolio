@@ -1,11 +1,16 @@
-import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { pathname } = useLocation();
 
+    // Close mobile menu on route change (browser back/forward)
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname]);
 
     const links = [
         { path: "/", label: "Index" },
