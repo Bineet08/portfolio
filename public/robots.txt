@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-opal-beta-41.vercel.app/sitemap.xml
