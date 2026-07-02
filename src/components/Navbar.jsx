@@ -26,8 +26,8 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-5 flex justify-between items-center">
 
                 <Link to="/" className="flex items-center gap-3 group" aria-label="Home">
-                    <Logo className="w-5 h-5 grayscale group-hover:grayscale-0 group-hover:rotate-6 transition-all duration-500 ease-out" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-neutral-400 group-hover:text-neutral-100 transition-colors mt-0.5">
+                    <Logo className="w-5 h-5  group-hover:grayscale-0 group-hover:rotate-6 transition-all duration-500 ease-out" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-neutral-200 group-hover:text-neutral-100 transition-colors mt-0.5">
                         BINEET GUPTA
                     </span>
                 </Link>
@@ -41,7 +41,7 @@ export default function Navbar() {
                             className={({ isActive }) =>
                                 `relative text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 pb-1.5 ${isActive
                                     ? "text-neutral-50"
-                                    : "text-neutral-500 group-hover/nav:text-neutral-600 hover:!text-neutral-200"
+                                    : "text-neutral-500 group-hover/nav:text-neutral-600 hover:text-neutral-200!"
                                 }`
                             }
                         >
@@ -51,7 +51,7 @@ export default function Navbar() {
                                     {isActive && (
                                         <motion.div
                                             layoutId="nav_underline"
-                                            className="absolute left-0 right-0 bottom-0 h-[2px] bg-neutral-100"
+                                            className="absolute left-0 right-0 bottom-0 h-0.5 bg-neutral-100"
                                             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                                         />
                                     )}
@@ -69,9 +69,9 @@ export default function Navbar() {
                     aria-expanded={isOpen}
                 >
                     <div className="w-5 h-5 relative flex items-center justify-center">
-                        <span className={`absolute block w-full h-[1px] bg-current transition-transform duration-300 ease-[0.16,1,0.3,1] ${isOpen ? 'rotate-45' : '-translate-y-1.5'}`} />
-                        <span className={`absolute block w-full h-[1px] bg-current transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
-                        <span className={`absolute block w-full h-[1px] bg-current transition-transform duration-300 ease-[0.16,1,0.3,1] ${isOpen ? '-rotate-45' : 'translate-y-1.5'}`} />
+                        <span className={`absolute block w-full h-px bg-current transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'rotate-45' : '-translate-y-1.5'}`} />
+                        <span className={`absolute block w-full h-px bg-current transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+                        <span className={`absolute block w-full h-px bg-current transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? '-rotate-45' : 'translate-y-1.5'}`} />
                     </div>
                 </button>
             </div>

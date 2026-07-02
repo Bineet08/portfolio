@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { fetchLeetCodeData, fetchLeetCodeContestData } from "../services/leetcodeApi";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -8,6 +10,13 @@ const fadeUp = {
 const RATINGS = {
   codeforces: "1500+",
   leetcode: "2100+",
+  codechef: "1700+",
+};
+
+const links = {
+  codeforces: "https://codeforces.com/profile/bineet0917",
+  leetcode: "https://leetcode.com/ankit__1729",
+  codechef: "https://www.codechef.com/users/ankit_0917",
 };
 
 export default function Skills() {
@@ -26,6 +35,37 @@ export default function Skills() {
     "Tools": ["Git", "GitHub", "VS Code", "npm", "Postman", "Vercel", "Render"],
     "Fundamentals": ["Data Structures", "Algorithms", "Problem Solving", "System Design"],
   };
+
+  const [leetcode, setLeetcode] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchLeetCodeData("ankit__1729");
+        setLeetcode(data);
+      } catch (error) {
+        console.error("Error fetching LeetCode data:", error);
+      }
+    };
+
+    fetchData();
+  },[]);
+
+  const [contestData, setContestData] = useState({});
+
+  useEffect(() => {
+    const fetchContestData = async () => {
+      try {
+        const data = await fetchLeetCodeContestData("ankit__1729");
+        console.log(data);
+        setContestData(data);
+      } catch (error) {
+        console.error("Error fetching LeetCode contest data:", error);
+      }
+    };
+
+    fetchContestData();
+  }, []);
 
   return (
     <section className="min-h-screen px-6 md:px-12 lg:px-24 pt-40 pb-32 bg-[#050505] relative z-10">
@@ -88,7 +128,7 @@ export default function Skills() {
               <div className="grid sm:grid-cols-2 gap-8">
                 <div className="stark-panel p-6 border-l-2 border-l-neutral-600 group hover:border-l-white transition-colors">
                   <div className="flex items-baseline justify-between mb-4">
-                    <h3 className="text-base font-bold text-neutral-200">Codeforces</h3>
+                    <span className="text-base font-bold text-neutral-200 hover:text-white transition-colors ">Codeforces</span>
                     <span className="text-sm font-mono text-neutral-500">{RATINGS.codeforces}</span>
                   </div>
                   <p className="text-sm text-neutral-500 leading-relaxed">
@@ -97,11 +137,37 @@ export default function Skills() {
                 </div>
                 <div className="stark-panel p-6 border-l-2 border-l-neutral-600 group hover:border-l-white transition-colors">
                   <div className="flex items-baseline justify-between mb-4">
-                    <h3 className="text-base font-bold text-neutral-200">LeetCode</h3>
+                    <a
+                      href={links.leetcode}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-base font-bold text-neutral-200 hover:text-white transition-colors"
+                    >
+                      LeetCode
+                    </a>
                     <span className="text-sm font-mono text-neutral-500">{RATINGS.leetcode}</span>
                   </div>
                   <p className="text-sm text-neutral-500 leading-relaxed">
                     Consistent problem solving across data structures. Preferring clean over clever code.
+                  </p>
+                  <p className="text-sm text-neutral-500 leading-relaxed mt-2">
+                    Ranking: {contestData?.contestGlobalRanking??"N/A"}
+                  </p>
+                </div>
+                <div className="stark-panel p-6 border-l-2 border-l-neutral-600 group hover:border-l-white transition-colors">
+                  <div className="flex items-baseline justify-between mb-4">
+                    <a
+                      href={links.codechef}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-base font-bold text-neutral-200 hover:text-white transition-colors"
+                    >
+                      CodeChef
+                    </a>
+                    <span className="text-sm font-mono text-neutral-500">{RATINGS.codechef}</span>
+                  </div>
+                  <p className="text-sm text-neutral-500 leading-relaxed">
+                    Regular contest participation. Focus on implementation accuracy and complexity analysis.
                   </p>
                 </div>
               </div>

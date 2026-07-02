@@ -138,7 +138,7 @@ export default function Home() {
                 </Link>
 
                 <a
-                  href="/resume.pdf"
+                  href="/public_resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center px-8 py-3.5 border border-neutral-800 text-neutral-400 font-mono text-[11px] uppercase tracking-[0.2em] font-bold overflow-hidden transition-all duration-300 hover:border-neutral-500 hover:text-white hover:bg-neutral-900/40 rounded-[2px]"
