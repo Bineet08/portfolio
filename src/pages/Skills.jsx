@@ -57,7 +57,6 @@ export default function Skills() {
     const fetchContestData = async () => {
       try {
         const data = await fetchLeetCodeContestData("ankit__1729");
-        console.log(data);
         setContestData(data);
       } catch (error) {
         console.error("Error fetching LeetCode contest data:", error);

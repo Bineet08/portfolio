@@ -91,7 +91,7 @@ export default function ProjectCard({ project }) {
 
       {/* Image - Right Side */}
       <div className="md:col-span-7 order-1 md:order-2 flex items-center">
-        <div className="editorial-frame w-full aspect-[4/3] md:aspect-[16/10] bg-[#0a0a0a]">
+        <div className="editorial-frame project-image-frame w-full aspect-[4/3] md:aspect-[16/10] bg-[#0a0a0a]">
           <img
             src={project.image}
             alt={project.title}

@@ -5,7 +5,13 @@ import Logo from "./Logo";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isLight, setIsLight] = useState(() => localStorage.getItem("portfolio-theme") === "light");
     const { pathname } = useLocation();
+
+    useEffect(() => {
+        document.documentElement.dataset.theme = isLight ? "light" : "dark";
+        localStorage.setItem("portfolio-theme", isLight ? "light" : "dark");
+    }, [isLight]);
 
     // Close mobile menu on route change (browser back/forward)
     useEffect(() => {
@@ -61,19 +67,32 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                {/* Mobile toggle */}
-                <button
-                    className="md:hidden p-2 text-neutral-500 hover:text-neutral-200 transition-colors"
-                    onClick={() => setIsOpen(!isOpen)}
-                    aria-label="Toggle navigation menu"
-                    aria-expanded={isOpen}
-                >
-                    <div className="w-5 h-5 relative flex items-center justify-center">
-                        <span className={`absolute block w-full h-px bg-current transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'rotate-45' : '-translate-y-1.5'}`} />
-                        <span className={`absolute block w-full h-px bg-current transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
-                        <span className={`absolute block w-full h-px bg-current transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? '-rotate-45' : 'translate-y-1.5'}`} />
-                    </div>
-                </button>
+                <div className="flex items-center gap-2">
+                    <button
+                        type="button"
+                        className="flex items-center justify-center w-8 h-8 border border-neutral-800 text-neutral-500 hover:text-neutral-100 hover:border-neutral-600 transition-colors"
+                        onClick={() => setIsLight(!isLight)}
+                        aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
+                        aria-pressed={isLight}
+                        title={`Switch to ${isLight ? "dark" : "light"} mode`}
+                    >
+                        <span aria-hidden="true" className="text-sm leading-none">{isLight ? "☾" : "☼"}</span>
+                    </button>
+
+                    {/* Mobile toggle */}
+                    <button
+                        className="md:hidden p-2 text-neutral-500 hover:text-neutral-200 transition-colors"
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Toggle navigation menu"
+                        aria-expanded={isOpen}
+                    >
+                        <div className="w-5 h-5 relative flex items-center justify-center">
+                            <span className={`absolute block w-full h-px bg-current transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'rotate-45' : '-translate-y-1.5'}`} />
+                            <span className={`absolute block w-full h-px bg-current transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+                            <span className={`absolute block w-full h-px bg-current transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? '-rotate-45' : 'translate-y-1.5'}`} />
+                        </div>
+                    </button>
+                </div>
             </div>
 
             {/* Mobile menu */}

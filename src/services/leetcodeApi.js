@@ -1,4 +1,4 @@
-{/*
+/*
 const LEETCODE_API = "https://leetcode.com/graphql";
 
 const query = `
@@ -72,7 +72,7 @@ export const fetchLeetCodeData = async (username) => {
     console.error("LeetCode API Error:", err);
     return null;
   }
-}; */}
+}; */
 
 
 const BASE_URL = "https://alfa-leetcode-api.onrender.com";

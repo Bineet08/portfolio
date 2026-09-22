@@ -73,7 +73,7 @@ export default function Home() {
               <div className="flex items-center justify-between gap-4">
                 <motion.h1
                   variants={fadeUp}
-                  className="text-[clamp(2.75rem,10vw,7.5rem)] font-black text-neutral-50 tracking-[-0.05em] leading-[0.82] flex-1"
+                  className="hero-title text-[clamp(2.75rem,10vw,7.5rem)] font-black text-neutral-50 leading-[0.86] flex-1"
                 >
                   BINEET<br />GUPTA
                 </motion.h1>

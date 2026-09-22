@@ -7,17 +7,142 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: #050505; /* Almost pure black for maximum contrast */
   color: #a3a3a3; /* neutral-400 */
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+[data-theme="light"] body {
+  background-color: #f4f3ef;
+  color: #525252;
+}
+
+[data-theme="light"] {
+  --light-accent: #0f766e;
+  --light-accent-soft: #d8ebe7;
+  --light-metadata: #9a6700;
+}
+
+[data-theme="light"] .bg-\[\#050505\],
+[data-theme="light"] .bg-\[\#080808\],
+[data-theme="light"] .bg-\[\#0a0a0a\] {
+  background-color: #ebe9e3;
+}
+
+[data-theme="light"] .bg-\[\#070707\]\/30 {
+  background-color: rgb(229 228 223 / 30%);
+}
+
+[data-theme="light"] .bg-neutral-950 {
+  background-color: #e5e4df;
+}
+
+[data-theme="light"] .bg-neutral-800 {
+  background-color: #cbd5d1;
+}
+
+[data-theme="light"] .bg-black\/10 {
+  background-color: rgb(15 23 42 / 4%);
+}
+
+[data-theme="light"] .bg-black\/20 {
+  background-color: rgb(15 23 42 / 7%);
+}
+
+[data-theme="light"] .bg-neutral-900\/40,
+[data-theme="light"] .bg-neutral-900\/50 {
+  background-color: rgb(163 163 163 / 40%);
+}
+
+[data-theme="light"] .text-neutral-50,
+[data-theme="light"] .text-neutral-100,
+[data-theme="light"] .text-neutral-200 {
+  color: #171717;
+}
+
+[data-theme="light"] .text-neutral-300,
+[data-theme="light"] .text-neutral-400 {
+  color: #525252;
+}
+
+[data-theme="light"] .text-neutral-500 {
+  color: #566575;
+}
+
+[data-theme="light"] .text-neutral-600,
+[data-theme="light"] .text-neutral-700,
+[data-theme="light"] .text-neutral-800 {
+  color: var(--light-metadata);
+}
+
+[data-theme="light"] .border-neutral-800,
+[data-theme="light"] .border-neutral-900,
+[data-theme="light"] .border-neutral-900\/60 {
+  border-color: #d4d4d4;
+}
+
+[data-theme="light"] .bg-neutral-100 {
+  background-color: var(--light-accent);
+  color: #ffffff;
+}
+
+[data-theme="light"] .hover\:text-white:hover {
+  color: var(--light-accent);
+}
+
+[data-theme="light"] .group:hover .group-hover\:text-white {
+  color: var(--light-accent);
+}
+
+[data-theme="light"] .hover\:bg-neutral-100:hover {
+  background-color: var(--light-accent-soft);
+  color: #115e59;
+}
+
+[data-theme="light"] .eyebrow {
+  color: var(--light-accent);
+}
+
+[data-theme="light"] .border-neutral-800 {
+  border-color: #c8d8d5;
+}
+
+[data-theme="light"] .hover\:bg-neutral-900\/40:hover {
+  background-color: rgb(212 212 212 / 40%);
+}
+
+[data-theme="light"] .bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(23, 23, 23, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 23, 23, 0.045) 1px, transparent 1px);
+}
+
+.hero-title {
+  max-width: 8ch;
+  text-wrap: balance;
+}
+
+[data-theme="light"] .hero-title {
+  text-shadow: 0 2px 0 rgb(255 255 255 / 55%);
+}
+
+[data-theme="light"] .bg-vignette {
+  background: radial-gradient(circle 800px at 50% 35%, rgb(15 118 110 / 7%), transparent 70%);
 }
 
 ::selection {
   background-color: #fafafa;
   color: #050505;
+}
+
+[data-theme="light"] ::selection {
+  background-color: var(--light-accent-soft);
+  color: #115e59;
 }
 
 /* Sophisticated grid pattern representing blueprint/system architecture */
@@ -46,6 +171,14 @@ body {
   background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.06) 20%, rgba(255, 255, 255, 0.06) 80%, transparent);
 }
 
+[data-theme="light"] .blueprint-line-h {
+  background: linear-gradient(to right, transparent, rgb(15 118 110 / 18%) 20%, rgb(15 118 110 / 18%) 80%, transparent);
+}
+
+[data-theme="light"] .blueprint-line-v {
+  background: linear-gradient(to bottom, transparent, rgb(15 118 110 / 18%) 20%, rgb(15 118 110 / 18%) 80%, transparent);
+}
+
 /* Polished Editorial Frames for Images */
 .editorial-frame {
   position: relative;
@@ -62,6 +195,20 @@ body {
   pointer-events: none;
 }
 
+[data-theme="light"] .project-image-frame {
+  background-color: #e7e5df;
+  border: 1px solid #aaa69b;
+  box-shadow:
+    0 0 0 4px #f4f3ef,
+    0 0 0 5px #c9c5ba,
+    0 16px 30px rgb(35 35 32 / 10%);
+}
+
+[data-theme="light"] .project-image-frame::after {
+  inset: 10px;
+  border-color: rgb(255 255 255 / 82%);
+}
+
 /* Stark, modern panels instead of glass */
 .stark-panel {
   background: #0a0a0a;
@@ -71,6 +218,7 @@ body {
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #050505; }
+[data-theme="light"] ::-webkit-scrollbar-track { background: #f4f3ef; }
 ::-webkit-scrollbar-thumb { background: #262626; }
 ::-webkit-scrollbar-thumb:hover { background: #404040; }
 

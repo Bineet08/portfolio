@@ -38,7 +38,7 @@ export default function FeaturedProject() {
             className="group relative flex flex-col"
           >
             {/* Editorial Image Frame */}
-            <div className="editorial-frame aspect-[4/3] w-full bg-[#0a0a0a] mb-6">
+            <div className="editorial-frame project-image-frame aspect-[4/3] w-full bg-[#0a0a0a] mb-6">
               <img
                 src={project.image}
                 alt={project.title}
